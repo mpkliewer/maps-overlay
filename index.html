@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+	<meta charset="utf-8">
+	<title>Ground Overlays</title>
+	<style>
+		html,
+		body,
+		#map-canvas {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+	<script>
+		// This example uses a GroundOverlay to place an image on the map
+		// showing an antique map of Newark, NJ.
+
+		var historicalOverlay;
+
+		function initialize() {
+
+			var torrancelearning = new google.maps.LatLng(42.31980948142244, -84.02003514051438);
+			var imageBounds = new google.maps.LatLngBounds(
+				new google.maps.LatLng(42.321721277377016,  -84.02365075826646),
+				new google.maps.LatLng(42.31777466382109, -84.01335107564927));
+
+			var mapOptions = {
+				zoom: 13,
+				center: torrancelearning
+			};
+
+			var map = new google.maps.Map(document.getElementById('map-canvas'),
+				mapOptions);
+
+			historicalOverlay = new google.maps.GroundOverlay(
+				'http://torrancelearning.com/tests/2015/maps-overlay/map-parking-overlay.png',
+				imageBounds);
+
+
+			historicalOverlay.setMap(map);
+
+			// find map bounds
+//			google.maps.event.addListener(map, 'idle', function (ev) {
+//				var bounds = map.getBounds();
+//				var ne = bounds.getNorthEast(); // LatLng of the north-east corner
+//				var sw = bounds.getSouthWest(); // LatLng of the south-west corder
+//
+//				var nw = new google.maps.LatLng(ne.lat(), sw.lng());
+//				var se = new google.maps.LatLng(sw.lat(), ne.lng());
+//				console.log('nw:', nw);
+//				console.log('se:', se);
+//			});
+		}
+
+		google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
+</head>
+
+<body>
+	<div id="map-canvas"></div>
+</body>
+
+</html>
